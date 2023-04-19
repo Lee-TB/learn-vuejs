@@ -7,62 +7,36 @@
     <title>Learn Vuejs</title>
   </head>
   <body>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-
     <h1>Hello Vuejs</h1>
 
     <div id="app">
-      <p v-if="message.length % 2 === 0">Even: {{message.toUpperCase()}}</p>
-      <p v-else>Odd: {{message.toUpperCase()}}</p>
-      <ul>
-        <li v-for="number in listOfNumbers">
-          <p>{{number.name}}</p>
-          <ul>
-            <li v-for="item in number.list">{{item}}</li>
-          </ul>
-        </li>
+      <p v-if="characterList.length === 0">There are no characters</p>
+      <ul v-else>
+        <li v-for="character in characterList">{{character.name}}</li>
       </ul>
+      <input type="number" v-model="increaseAmount" />
+      <button @click="increaseCount">count: {{count}}</button>
     </div>
 
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script>
-      const { createApp } = Vue;
-
-      const app = createApp({
-        data() {
-          return {
-            message: 'vue work!',
-            listOfNumbers: [
-              {
-                name: 1,
-                id: '0d310717-0b6e-4508-a97b-80c3f31477ac',
-                list: [1, 2, 3],
-              },
-              {
-                name: 2,
-                id: '7d61ca99-e047-4e53-9766-030602940787',
-                list: [1, 2, 3],
-              },
-              {
-                name: 3,
-                id: '604ffe2f-3000-4e6d-9ec3-0ff20a7c54f5',
-                list: [1, 2, 3],
-              },
-              {
-                name: 4,
-                id: 'fd47aa1a-fcac-41f9-8224-179013d8cb79',
-                list: [1, 2, 3],
-              },
-              {
-                name: 5,
-                id: 'd51b0473-c87f-4599-a1fa-a5374de5fab9',
-                list: [1, 2, 3],
-              },
-            ],
-          };
+      Vue.createApp({
+        data: () => ({
+          count: 10,
+          increaseAmount: 1,
+          characterList: [
+            { name: 'azord' },
+            { name: 'bzord' },
+            { name: 'czord' },
+            { name: 'dzord' },
+          ],
+        }),
+        methods: {
+          increaseCount() {
+            this.count += this.increaseAmount;
+          },
         },
-      });
-
-      app.mount('#app');
+      }).mount('#app');
     </script>
   </body>
 </html>
